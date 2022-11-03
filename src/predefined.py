@@ -11,10 +11,12 @@ class LoadRawData():
         return f"csv\t= {self.csv}"
 
 
-    def __getrawdata_csv(self):
-        defname = '__getrawdata_csv'
+    def load_csv(self):
+        defname = 'load_csv'
         try:
-            return pd.read_csv(self.csv, parse_dates=['date'])
+            df = pd.read_csv(self.csv, parse_dates=['date'])
+            df.set_index(['date'],inplace=True)
+            return df
         except Exception as e:
             print(f"ERROR [{defname}] : {str(e)}")
 
@@ -22,8 +24,7 @@ class LoadRawData():
     def __create_dataframe(self, pred_day):
         defname = '__create_dataframe'
         try:
-            df = self.__getrawdata_csv().copy()
-            df.set_index(['date'],inplace=True)
+            df = self.load_csv().copy()
 
             target_list = ['STRONG SELL','SELL','HOLD','BUY','STRONG BUY']
             column_list = list(df.columns) + ['target','target_id']
@@ -46,13 +47,12 @@ class LoadRawData():
             print(f"ERROR [{defname}] : {str(e)}")
 
 
-    def create_pkl(self, pkl):
+    def create_pkl(self, obj, pkl):
         defname = 'create_pkl'
         try:
             with open(pkl, 'wb') as f:
-                obj = self.__create_dataframe(pred_day=4)
                 pickle.dump(obj, f)
-                print(f'"{pkl}" has been created')
+                print(f'"{pkl}" ({type(obj)}) has been created')
 
         except Exception as e:
             print(f"ERROR [{defname}] : {str(e)}")
