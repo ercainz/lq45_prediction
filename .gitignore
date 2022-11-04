@@ -160,6 +160,6 @@ cython_debug/
 #.idea/
 
 .vscode/
-venv_lq45/*.*
+venv_lq45/
 desktop.ini
 ~*.*
