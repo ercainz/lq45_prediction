@@ -159,6 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-venv_lq45/
+.vscode/
+venv_lq45/*.*
 desktop.ini
 ~*.*
