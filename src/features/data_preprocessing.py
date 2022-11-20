@@ -169,8 +169,7 @@ class DataPreprocessing():
             df = dataframe.copy()
 
             #cols = self.stationary_checker_with_adfuller(dataframe=df_train, show_detail=True)
-            #gf.create_pkl(obj=cols, pkl=r'..\models\pkl\list_non_stationary_cols.pkl')
-            cols = gf.load_pkl(pkl=non_stationary_cols_pkl)
+            cols = gf.load_from_pkl(filename=non_stationary_cols_pkl)
 
             if cols is None:
                 raise Exception('pkl not found')
@@ -190,30 +189,31 @@ class DataPreprocessing():
         try:
             lohi_list = []
             for col in train_dataframe.columns:
+                Q1 = np.percentile(train_dataframe[col], 25.00)
+                Q3 = np.percentile(train_dataframe[col], 75.00)
+                IQR = Q3 - Q1
+                lo_th = Q1 - (1.5 * IQR)
+                hi_th = Q3 + (1.5 * IQR)
+
                 lo_value = np.percentile(train_dataframe[col], lo_perc)
                 hi_value = np.percentile(train_dataframe[col], hi_perc)
-                lohi_list.append([col, lo_value, hi_value])
+                lohi_list.append([col, lo_th, hi_th, lo_value, hi_value, Q1, Q3, IQR])
 
-            df_result = pd.DataFrame(lohi_list, columns=['col_name','lo_value','hi_value']).set_index('col_name')
+            cols =['col_name','lo_threshold','hi_threshold','lo_value','hi_value','Q1','Q3','IQR']
+            df_result = pd.DataFrame(lohi_list, columns=cols).set_index('col_name')
 
             return df_result
         except Exception as e:
             print(f"ERROR [{defname}] : {str(e)}")
     #==========================================================================================================================#
     #==========================================================================================================================#
-    def outlier_treatment(self, dataframe, datacolumn, input_lower_value, input_upper_value):
+    def outlier_treatment(self, dataframe, datacolumn, lower_th, upper_th, input_lower_value, input_upper_value):
         defname = 'DataPreprocessing|outlier_treatment'
         try:
             df = dataframe.copy()
-            df_stat = pd.DataFrame(df[datacolumn].describe()).T
-            Q1, Q3 = df_stat['25%'].values[0], df_stat['75%'].values[0]
 
-            IQR = Q3 - Q1
-            lower_range = Q1 - (1.5 * IQR)
-            upper_range = Q3 + (1.5 * IQR)
-
-            df[datacolumn] = np.where(df[datacolumn] > upper_range, input_upper_value, df[datacolumn])
-            df[datacolumn] = np.where(df[datacolumn] < lower_range, input_lower_value, df[datacolumn])
+            df[datacolumn] = np.where(df[datacolumn] > upper_th, input_upper_value, df[datacolumn])
+            df[datacolumn] = np.where(df[datacolumn] < lower_th, input_lower_value, df[datacolumn])
 
             return df[datacolumn]
         except Exception as e:
@@ -227,8 +227,15 @@ class DataPreprocessing():
             for col in dataframe.iloc[:,dataframe.columns != 'seasonal'].columns:
                 i_lo = df_value_for_outlier.loc[df_value_for_outlier.index == col,:]['lo_value'].values[0]
                 i_hi = df_value_for_outlier.loc[df_value_for_outlier.index == col,:]['hi_value'].values[0]
+                th_lo = df_value_for_outlier.loc[df_value_for_outlier.index == col,:]['lo_threshold'].values[0]
+                th_hi = df_value_for_outlier.loc[df_value_for_outlier.index == col,:]['hi_threshold'].values[0]
 
-                series = self.outlier_treatment(dataframe=dataframe, datacolumn=col, input_lower_value=i_lo, input_upper_value=i_hi)
+                series = self.outlier_treatment(dataframe=dataframe,
+                                                datacolumn=col,
+                                                lower_th=th_lo,
+                                                upper_th=th_hi,
+                                                input_lower_value=i_lo,
+                                                input_upper_value=i_hi)
                 series_list.append(series)
 
             series_list.append(dataframe.seasonal)

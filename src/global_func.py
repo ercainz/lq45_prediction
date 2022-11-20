@@ -2,25 +2,40 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
+import joblib
+import configparser
 
-def create_pkl(obj, pkl):
-    defname = 'global_func|create_pkl'
+def read_config(config_dir, section, key):
+    defname = 'global_func|read_config'
     try:
-        with open(pkl, 'wb') as f:
-            pickle.dump(obj, f)
-            print(f'"{pkl}" ({type(obj)}) has been created')
+        cfg = configparser.ConfigParser()    
+        cfg.read(f'{config_dir}config.ini')
 
+        return cfg[section][key]
     except Exception as e:
         print(f"ERROR [{defname}] : {str(e)}")
 #==========================================================================================================================#
 #==========================================================================================================================#
-def load_pkl(pkl):
-    defname = 'global_func|load_pkl'
+def save_as_pkl(obj, filename, compress=3):
+    '''
+    compress :\n
+        int from 0 to 9.\n
+        Optional compression level for the data.\n
+        0 is no compression. Higher value means more compression, but also slower read and write times.\n
+        Using a value of 3 is often a good compromise.\n
+    '''
+    defname = 'global_func|save_as_pkl'
     try:
-        with open(pkl, 'rb') as f:
-            return pickle.load(f)
-
+        joblib.dump(obj, filename=filename, compress=compress)
+    except Exception as e:
+        print(f"ERROR [{defname}] : {str(e)}")
+#==========================================================================================================================#
+#==========================================================================================================================#
+def load_from_pkl(filename):
+    defname = 'global_func|load_from_pkl'
+    try:
+        obj = joblib.load(filename=filename)
+        return obj
     except Exception as e:
         print(f"ERROR [{defname}] : {str(e)}")
 #==========================================================================================================================#
