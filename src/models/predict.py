@@ -70,14 +70,24 @@ class Predictor():
     def parsing_data(self, prior, current):
         defname = 'Predictor|parsing_data'
         try:
-            #date_current = datetime.strptime('20221122', "%Y%m%d")
+            prior_copy = prior.copy()
+            current_copy = current.copy()
+
+            # convert to float
+            for i in range(0,len(current_copy)):
+                current_copy[i] = float(current_copy[i])
+                if np.isnan(current_copy[i]):
+                    current_copy[i] = float(0)
+
+            for i in range(0,len(prior_copy)):
+                prior_copy[i] = float(prior_copy[i])
+                if np.isnan(prior_copy[i]):
+                    prior_copy[i] = float(0)
+
             date_current = datetime.today() - BDay(1)
             date_prior = date_current - BDay(1)
 
-            current_copy = current.copy()
-            current_copy.insert(0, date_current.strftime("%Y%m%d"))
-
-            prior_copy = prior.copy()
+            current_copy.insert(0, date_current.strftime("%Y%m%d"))            
             prior_copy.insert(0, date_prior.strftime("%Y%m%d"))
 
             data = self.input_dict.copy()
