@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
-from pandas.tseries.offsets import BDay
 
 import sys
 sys.path.insert(0, '..')
@@ -23,19 +22,44 @@ class Predictor():
                             }
     #==========================================================================================================================#
     #==========================================================================================================================#
+    def __input_validation(self, input_list):
+        defname = 'Predictor|__input_validation'
+        invalid_msg = ''
+        result = False, invalid_msg
+        try:
+            # date:
+            try:
+                if len(input_list[0]) != 8:
+                    raise Exception
+
+                date = datetime.strptime(input_list[0], "%Y%m%d")
+                result = True
+            except:
+                invalid_msg = "`date` format must be `yyyymmdd`"
+                print(f"Validation failed : {invalid_msg}")
+                return False, invalid_msg
+            
+            return result, invalid_msg
+        except Exception as e:
+            print(f"ERROR [{defname}] : {str(e)}")
+            return False, invalid_msg
+    #==========================================================================================================================#
+    #==========================================================================================================================#
     def parsing_data(self, input_list):
         defname = 'Predictor|parsing_data'
+        err_validation_msg = ''
         try:
             input_list_copy = input_list.copy()
 
             # convert to float
-            for i in range(0,len(input_list_copy)):
+            for i in range(1,len(input_list_copy)):
                 input_list_copy[i] = float(input_list_copy[i])
                 if np.isnan(input_list_copy[i]):
                     input_list_copy[i] = float(0)
 
-            date_input_list = datetime.today() - BDay(1)
-            input_list_copy.insert(0, date_input_list.strftime("%Y%m%d"))            
+            is_valid, err_validation_msg = self.__input_validation(input_list=input_list_copy)
+            if not is_valid:
+                raise Exception('Failed to pass `Input-Validation` Test')         
 
             data = self.input_dict.copy()
             i=0
@@ -47,9 +71,10 @@ class Predictor():
             df_result.set_index('date', drop=True, inplace=True)
             df_result.index = pd.to_datetime(df_result.index)
 
-            return df_result
+            return df_result, err_validation_msg
         except Exception as e:
             print(f"ERROR [{defname}] : {str(e)}")
+            return None, err_validation_msg
     #==========================================================================================================================#
     #==========================================================================================================================#
     def get_pred_value(self, dataframe):
@@ -58,6 +83,7 @@ class Predictor():
             forecast,_ = self.model.predict(n_periods=len(dataframe), 
                                             X=dataframe,
                                             return_conf_int=True)
+
             return forecast.values
         except Exception as e:
             print(f"ERROR [{defname}] : {str(e)}")

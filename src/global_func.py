@@ -40,6 +40,22 @@ def load_from_pkl(filename):
         print(f"ERROR [{defname}] : {str(e)}")
 #==========================================================================================================================#
 #==========================================================================================================================#
+def api_homepage():
+    defname = 'global_func|api_homepage'
+    try:
+        config_dir = 'config\\'
+        dict_result = {"Name": read_config(config_dir=config_dir, section='PROJECT', key='NAME'),
+                        "Description": read_config(config_dir=config_dir, section='PROJECT', key='DESCRIPTION'),
+                        "Author": read_config(config_dir=config_dir, section='PROJECT', key='AUTHOR'),
+                        "Version": read_config(config_dir=config_dir, section='PROJECT', key='VERSION'),
+                        "Last Update": read_config(config_dir=config_dir, section='PROJECT', key='LASTUPDATE'),
+                        }
+
+        return dict_result
+    except Exception as e:
+        print(f"ERROR [{defname}] : {str(e)}")
+#==========================================================================================================================#
+#==========================================================================================================================#
 def plotting_hist_all(dataframe):
     fig, axes = plt.subplots(nrows=7
                             ,ncols=2
