@@ -16,7 +16,7 @@ Belom kelar....
 
 ## DOKUMENTASI PROJECT
 ### Data yang diperlukan:
-Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan *SARIMAX* juga memerlukan input eksogen (X). Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval *harian* sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:
+Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan *SARIMAX* juga memerlukan input eksogen (X).<br>Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval *harian* sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:
 
 * Harga penutupan index LQ45 pada T+3 (hanya digunakan untuk pemodelan, namun tidak digunakan saat proses prediksi).
 
@@ -141,7 +141,7 @@ python src\api.py --reload
 
 
 ## KESIMPULAN
-Model *SARIMAX* yang merupakan pengembangan dari model *ARIMA*/*ARIMAX*/*SARIMA* secara umum dapat digunakan untuk melakukan prediksi nilai indeks LQ45 3 hari ke depan. Namun hasil prediksi dirasa masih kurang akurat. Hal ini sebenarnya dapat diatasi dengan melakukan eksplorasi tiap-tiap *fitur* dengan lebih mendalam. Bisa juga dengan melakukan *hyperparameter tunning* yang lebih variatif pada model.
+Model *SARIMAX* yang merupakan pengembangan dari model *ARIMA*/*ARIMAX*/*SARIMA* secara umum dapat digunakan untuk melakukan prediksi nilai indeks LQ45 3 hari ke depan.<br>Namun hasil prediksi dirasa masih kurang akurat.<br>Hal ini sebenarnya dapat diatasi dengan melakukan eksplorasi tiap-tiap *fitur* dengan lebih mendalam. Bisa juga dengan melakukan *hyperparameter tunning* yang lebih variatif pada model.
 
 Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM (Long Short Term Memory network)* dan/atau *GRU (Gated Recurrent Unit)* yang menurut beberapa sumber, dapat menghasilkan performa yang lebih baik ketimbang model *SARIMAX*.
 
