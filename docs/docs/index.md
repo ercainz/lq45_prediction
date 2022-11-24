@@ -135,15 +135,10 @@ python src\remodelling.py
 ```
 python src\api.py --reload
 ```
-> ![api_00](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_00.jpg)
+> ![api_server_up](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_server_up.jpg)
 
-> ![api_01](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_01.jpg)
+> ![api_client_test](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_client_test.jpg)
 
-> ![api_02](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_02.jpg)
-
-> ![api_03](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_03.jpg)
-
-> ![api_04](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_04.jpg)
 
 ## KESIMPULAN
 Model *SARIMAX* yang merupakan pengembangan dari model *ARIMA*/*ARIMAX*/*SARIMA* secara umum dapat digunakan untuk melakukan prediksi nilai indeks LQ45 3 hari ke depan. Namun hasil prediksi dirasa masih kurang akurat. Hal ini sebenarnya dapat diatasi dengan melakukan eksplorasi tiap-tiap *fitur* dengan lebih mendalam. Bisa juga dengan melakukan *hyperparameter tunning* yang lebih variatif pada model.
