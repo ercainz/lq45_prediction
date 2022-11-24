@@ -1,0 +1,5 @@
+site_name: ML-Process Final Project (Eric Arinoto)
+nav:
+  - ReadMe: index.md
+  - About: about.md
+theme: readthedocs
