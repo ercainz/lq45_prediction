@@ -1,5 +1,9 @@
-site_name: ML-Process Final Project (Eric Arinoto)
+site_name: ML-Process Final Project
+site_description: Prediksi Nilai Index LQ45
+site_author: Eric Arinoto
+copyright: eric_arinoto@2022
 nav:
   - ReadMe: index.md
   - About: about.md
-theme: readthedocs
+theme: 
+  name: readthedocs

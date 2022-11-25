@@ -18,23 +18,15 @@ Belom kelar....
 ### Data yang diperlukan:
 Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan *SARIMAX* juga memerlukan input eksogen (X).<br>Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval *harian* sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:
 
-* Harga penutupan index LQ45 pada T+3 (hanya digunakan untuk pemodelan, namun tidak digunakan saat proses prediksi).
-
-* Harga penutupan Indeks IHSG pada T0.
-
-* Harga penutupan Indeks IDX-30 pada T0.
-
-* Harga penutupan Indeks EIDO pada T0.
-
-* Harga penutupan Indeks S&P 500 pada T0.
-
-* Jumlah nominal transaksi pembelian domestik pada T0.
-
-* Jumlah nominal transaksi penjualan domestik pada T0.
-
-* Jumlah nominal transaksi pembelian asing pada T0.
-
-* Jumlah nominal transaksi penjualan asing pada T0.
+1. Harga penutupan index LQ45 pada T+3 (hanya digunakan untuk pemodelan, namun tidak digunakan saat proses prediksi).
+1. Harga penutupan Indeks IHSG pada T0.
+1. Harga penutupan Indeks IDX-30 pada T0.
+1. Harga penutupan Indeks EIDO pada T0.
+1. Harga penutupan Indeks S&P 500 pada T0.
+1. Jumlah nominal transaksi pembelian domestik pada T0.
+1. Jumlah nominal transaksi penjualan domestik pada T0.
+1. Jumlah nominal transaksi pembelian asing pada T0.
+1. Jumlah nominal transaksi penjualan asing pada T0.
 
 ### Output prediksi via API:
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
@@ -69,23 +61,23 @@ Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan sat
 Menggunakan format standar *json* dengan *key* sebagai berikut:
 
 * `date` - Tanggal dengan format `yyyymmdd`
-> * tipe data **string** dan harus terdiri dari 8 karakter
+> * tipe data **string** dan harus terdiri dari 8 karakter.
 * `jci` - Nilai penutupan indeks IHSG pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 1,000 hingga 20,000
+> * tipe data **float** dengan rentang nilai 1,000 hingga 20,000.
 * `idx30` - Nilai penutupan indeks IDX-30 pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 100 hingga 5,000
+> * tipe data **float** dengan rentang nilai 100 hingga 5,000.
 * `eido` - Nilai penutupan indeks EIDO pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 1 hingga 200
+> * tipe data **float** dengan rentang nilai 1 hingga 200.
 * `spy` - Nilai penutupan indeks S&P 500 pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 1 hingga 5,000
+> * tipe data **float** dengan rentang nilai 1 hingga 5,000.
 * `dom_b` - Jumlah nominal transaksi pembelian domestik (dalam satuan triliun) pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 0.01 hingga 100
+> * tipe data **float** dengan rentang nilai 0.01 hingga 100.
 * `dom_s` - Jumlah nominal transaksi penjualan domestik (dalam satuan triliun) pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 0.01 hingga 100
+> * tipe data **float** dengan rentang nilai 0.01 hingga 100.
 * `for_b` - Jumlah nominal transaksi pembelian asing (dalam satuan triliun) pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 0.01 hingga 100
+> * tipe data **float** dengan rentang nilai 0.01 hingga 100.
 * `for_s` - Jumlah nominal transaksi penjualan asing (dalam satuan triliun) pada tanggal `date`
-> * tipe data **float** dengan rentang nilai 0.01 hingga 100
+> * tipe data **float** dengan rentang nilai 0.01 hingga 100.
 
 Contoh:
 ```json
@@ -106,11 +98,12 @@ Contoh:
 Respons juga berupa format standar *json* dengan *key* sebagai berikut:
 
 * `input_date` - Tanggal sesuai input `date` dengan format `yyyymmdd`
-> * tipe data **string** yang terdiri dari 8 karakter
+> * tipe data **string** yang terdiri dari 8 karakter.
 * `pred_value` - Hasil prediksi Nilai indeks LQ45 3 hari kerja setelah `input_date`
-> * tipe data **float**
-* `pred_desc` - Deskripsi hasil prediksi
-> * tipe data **string**
+> * tipe data **float**.
+* `pred_desc` - Deskripsi dari hasil prediksi
+> * tipe data **string**.
+
 
 Contoh:
 ```json
@@ -123,13 +116,13 @@ Contoh:
 
 ### Menjalankan Layanan Machine Learning di Komputer Lokal:
 * **Melakukan Retrain Model** :
-> * Dari folder root, jalankan script python `remodelling.py` pada folder *src*
+> * Dari folder root, jalankan script python `remodelling.py` pada folder *src*.
 > * Pastikan dataset sudah berada di folder *[root]/data/raw* dengan nama file *dataset_Q122.csv* dengan format yang sesuai.
 ```
 python src\remodelling.py
 ```
 * **Menjalankan API** :
-> * Dari folder root, jalankan script python `api.py` pada folder *src*
+> * Dari folder root, jalankan script python `api.py` pada folder *src*.
 > * Setelah server API menyala (URL : *localhost:8080/pred/*), lakukan API POST dengan format json yang sesuai.
 
 ```
@@ -152,7 +145,7 @@ Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM
 > * [Informasi Umum Seputar S&P 500](https://help.pluang.com/knowledge/informasi-umum-seputar-snp-500)
 
 
-**Dekomposisi Seasonal**:
+**Dekomposisi seasonal**:
 > * [statsmodels seasonal_decompose](https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html)
 > * [How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)](https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/)
 
@@ -164,7 +157,7 @@ Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM
 > * [ARIMA Model – Complete Guide to Time Series Forecasting in Python (by: Selva Prabhakaran)](https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/)
 
 
-**Panduan Lengkap**:
+**Panduan lengkap**:
 > * [Inflation Forecasting (by: SwatiSethee)](https://medium.com/inflation-forecasting-using-sarimax-and-nkpc/plotting-monthly-inflation-over-the-selected-time-period-to-check-if-the-time-series-has-any-35e3b1fac761)
 > * [Complete Guide To SARIMAX in Python for Time Series Modeling (by: Yugesh Verma)](https://analyticsindiamag.com/complete-guide-to-sarimax-in-python-for-time-series-modeling/)
 
