@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Prediksi Nilai Index LQ45" /><meta name="author" content="Eric Arinoto" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>ML-Process Final Project</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ReadMe";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> ML-Process Final Project
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">ReadMe</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#deskripsi-project">DESKRIPSI PROJECT</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#background-permasalahan">Background Permasalahan:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#arsitektur-project">Arsitektur Project:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output-yang-diharapkan">Output yang diharapkan:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dokumentasi-project">DOKUMENTASI PROJECT</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#data-yang-diperlukan">Data yang diperlukan:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output-prediksi-via-api">Output prediksi via API:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#workflow-dari-project">Workflow dari Project:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dataset">DATASET</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#format-dan-deskripsi-data">Format dan deskripsi data:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cara-penggunaan">CARA PENGGUNAAN</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#format-input-untuk-melakukan-prediksi-via-api">Format input untuk melakukan prediksi via API:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#format-output-respons-dari-api">Format output Respons dari API:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#menjalankan-layanan-machine-learning-di-komputer-lokal">Menjalankan Layanan Machine Learning di Komputer Lokal:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#kesimpulan">KESIMPULAN</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#referensi">REFERENSI</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">ML-Process Final Project</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>ReadMe</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="prediksi-nilai-index-lq45">Prediksi Nilai Index LQ45</h1>
+<hr />
+<p>Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan <em>Model SARIMAX</em>.</p>
+<h2 id="deskripsi-project">DESKRIPSI PROJECT</h2>
+<h3 id="background-permasalahan">Background Permasalahan:</h3>
+<p>Belom kelar...</p>
+<h3 id="arsitektur-project">Arsitektur Project:</h3>
+<p>Belom kelar....</p>
+<h3 id="output-yang-diharapkan">Output yang diharapkan:</h3>
+<ul>
+<li>Prediksi harga penutupan Indeks LQ45 pada T+3.</li>
+</ul>
+<h2 id="dokumentasi-project">DOKUMENTASI PROJECT</h2>
+<h3 id="data-yang-diperlukan">Data yang diperlukan:</h3>
+<p>Berbeda dengan pemodelan menggunakan <em>ARIMA</em>/<em>SARIMA</em> yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan <em>SARIMAX</em> juga memerlukan input eksogen (X).<br>Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval <em>harian</em> sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:</p>
+<ol>
+<li>Harga penutupan index LQ45 pada T+3 (hanya digunakan untuk pemodelan, namun tidak digunakan saat proses prediksi).</li>
+<li>Harga penutupan Indeks IHSG pada T0.</li>
+<li>Harga penutupan Indeks IDX-30 pada T0.</li>
+<li>Harga penutupan Indeks EIDO pada T0.</li>
+<li>Harga penutupan Indeks S&amp;P 500 pada T0.</li>
+<li>Jumlah nominal transaksi pembelian domestik pada T0.</li>
+<li>Jumlah nominal transaksi penjualan domestik pada T0.</li>
+<li>Jumlah nominal transaksi pembelian asing pada T0.</li>
+<li>Jumlah nominal transaksi penjualan asing pada T0.</li>
+</ol>
+<h3 id="output-prediksi-via-api">Output prediksi via API:</h3>
+<ul>
+<li>Prediksi harga penutupan Indeks LQ45 pada T+3.</li>
+</ul>
+<h3 id="workflow-dari-project">Workflow dari Project:</h3>
+<ul>
+<li>Blok Diagram Persiapan Data</li>
+<li>Blok Diagram Preprocessing</li>
+<li>Blok Diagram Features Engineering</li>
+<li>Blok Diagram Pemodelan dan Evaluasinya</li>
+</ul>
+<h2 id="dataset">DATASET</h2>
+<h3 id="format-dan-deskripsi-data">Format dan deskripsi data:</h3>
+<p><strong>header csv</strong> - <em>date,lq45,jci,idx30,eido,spy,dom_b,dom_s,for_b,for_s</em></p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Tipe Data</th>
+<th>Definisi</th>
+<th>Deskripsi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td><strong>date</strong><br>dengan format<br><code>yyyy-mm-dd</code></td>
+<td>Deret waktu dengan<br>periode harian,<br>sesuai dengan kalender<br>hari kerja di Indonesia.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lq45</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Harga penutupan Index<br>LQ45</td>
+<td>Representasi/cerminan harga<br>saham dari 45 emiten  yang<br>ada di Bursa Efek Indonesia<br>(BEI) yang dipilih berdasarkan<br>pertimbangan likuiditas<br>tertinggi dan kapitalisasi<br>pasar terbesar dengan<br>kriteria-kriteria lain<br>yang sudah ditentukan.</td>
+</tr>
+<tr>
+<td><code>jci</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Harga penutupan Index<br>IHSG (Index Harga Saham<br>Gabungan)</td>
+<td>Cerminan harga dari<br>seluruh saham yang ada di<br>Bursa Efek Indonesia (BEI).</td>
+</tr>
+<tr>
+<td><code>idx30</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Harga penutupan Index<br>IDX-30</td>
+<td>Indeks saham yang mengukur<br>kinerja harga dari 30 saham yang<br>memiliki likuiditas tinggi dan<br>kapitalisasi pasar yang besar serta<br>didukung oleh kekuatan<br>fundamental perusahaannya<br>yang baik.</td>
+</tr>
+<tr>
+<td><code>eido</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Harga penutupan Index<br>EIDO</td>
+<td>Indeks Mutual Fund sejenis ETF<br>(Exchange Traded Fund) atau<br>reksadana dibursa "NYSE /<br>New York Stock Exchange", yang<br>didalamnya terdapat saham-saham<br>Indonesia yang dipilih berdasarkan<br>kriteria dari MSCI (Morgan Stanley<br>Composite Index).</td>
+</tr>
+<tr>
+<td><code>spy</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Harga penutupan Index<br>Standard &amp; Poor's 500<br>(S&amp;P 500)</td>
+<td>Representasi/cerminan harga<br>saham dari 500 emiten Amerika<br>Serikat yang dipilih berdasarkan<br>kapitalisasi pasar, likuiditas,<br>kelompok industri, beserta sejumlah<br>kriteria lainnya. Emiten dalam<br>indeks S&amp;P 500 dipilih oleh<br>Komite Indeks S&amp;P.</td>
+</tr>
+<tr>
+<td><code>dom_b</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Jumlah nominal transaksi<br>pembelian domestik<br>(dalam satuan triliun)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>dom_s</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Jumlah nominal transaksi<br>penjualan domestik<br>(dalam satuan triliun)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>for_b</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Jumlah nominal transaksi<br>pembelian asing<br>(dalam satuan triliun)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>for_s</code></td>
+<td><strong>float</strong><br>dengan format <code>.4f</code></td>
+<td>Jumlah nominal transaksi<br>penjualan asing<br>(dalam satuan triliun)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="cara-penggunaan">CARA PENGGUNAAN</h2>
+<h3 id="format-input-untuk-melakukan-prediksi-via-api">Format input untuk melakukan prediksi via API:</h3>
+<p>Menggunakan format standar <em>json</em> dengan <em>key</em> sebagai berikut:</p>
+<ul>
+<li><code>date</code> - Tanggal dengan format <code>yyyymmdd</code><blockquote>
+<ul>
+<li>tipe data <strong>string</strong> dan harus terdiri dari 8 karakter.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>jci</code> - Nilai penutupan indeks IHSG pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 1,000 hingga 20,000.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>idx30</code> - Nilai penutupan indeks IDX-30 pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 100 hingga 5,000.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>eido</code> - Nilai penutupan indeks EIDO pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 1 hingga 200.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>spy</code> - Nilai penutupan indeks S&amp;P 500 pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 1 hingga 5,000.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>dom_b</code> - Jumlah nominal transaksi pembelian domestik (dalam satuan triliun) pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 0.01 hingga 100.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>dom_s</code> - Jumlah nominal transaksi penjualan domestik (dalam satuan triliun) pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 0.01 hingga 100.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>for_b</code> - Jumlah nominal transaksi pembelian asing (dalam satuan triliun) pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 0.01 hingga 100.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>for_s</code> - Jumlah nominal transaksi penjualan asing (dalam satuan triliun) pada tanggal <code>date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong> dengan rentang nilai 0.01 hingga 100.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>Contoh:</p>
+<pre><code class="language-json">{
+    &quot;date&quot;: &quot;20220328&quot;,
+    &quot;jci&quot;: 7049.6030,
+    &quot;idx30&quot;: 549.373,
+    &quot;eido&quot;: 24.92,
+    &quot;spy&quot;: 455.91,
+    &quot;dom_b&quot;: 9.9995,
+    &quot;dom_s&quot;: 10.8573,
+    &quot;for_b&quot;: 4.2166,
+    &quot;for_s&quot;: 3.3587
+}
+</code></pre>
+<h3 id="format-output-respons-dari-api">Format output Respons dari API:</h3>
+<p>Respons juga berupa format standar <em>json</em> dengan <em>key</em> sebagai berikut:</p>
+<ul>
+<li><code>input_date</code> - Tanggal sesuai input <code>date</code> dengan format <code>yyyymmdd</code><blockquote>
+<ul>
+<li>tipe data <strong>string</strong> yang terdiri dari 8 karakter.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>pred_value</code> - Hasil prediksi Nilai indeks LQ45 3 hari kerja setelah <code>input_date</code><blockquote>
+<ul>
+<li>tipe data <strong>float</strong>.</li>
+</ul>
+</blockquote>
+</li>
+<li><code>pred_desc</code> - Deskripsi dari hasil prediksi<blockquote>
+<ul>
+<li>tipe data <strong>string</strong>.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>Contoh:</p>
+<pre><code class="language-json">{
+    &quot;input_date&quot;: &quot;20220328&quot;,
+    &quot;pred_value&quot;: 1053.672,
+    &quot;pred_desc&quot;: &quot;3 Business Days after 28-Mar-2022, LQ45 value would be 1053.672&quot;
+}
+</code></pre>
+<h3 id="menjalankan-layanan-machine-learning-di-komputer-lokal">Menjalankan Layanan Machine Learning di Komputer Lokal:</h3>
+<ul>
+<li><strong>Melakukan Retrain Model</strong> :<blockquote>
+<ul>
+<li>Dari folder root, jalankan script python <code>remodelling.py</code> pada folder <em>src</em>.</li>
+<li>Pastikan dataset sudah berada di folder <em>[root]/data/raw</em> dengan nama file <em>dataset_Q122.csv</em> dengan format yang sesuai.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<pre><code>python src\remodelling.py
+</code></pre>
+<ul>
+<li><strong>Menjalankan API</strong> :<blockquote>
+<ul>
+<li>Dari folder root, jalankan script python <code>api.py</code> pada folder <em>src</em>.</li>
+<li>Setelah server API menyala (URL : <em>localhost:8080/pred/</em>), lakukan API POST dengan format json yang sesuai.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<pre><code>python src\api.py --reload
+</code></pre>
+<blockquote>
+<p><img alt="api_server_up" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_server_up.jpg" /></p>
+<p><img alt="api_client_test" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/api_client_test.jpg" /></p>
+</blockquote>
+<h2 id="kesimpulan">KESIMPULAN</h2>
+<p>Model <em>SARIMAX</em> yang merupakan pengembangan dari model <em>ARIMA</em>/<em>ARIMAX</em>/<em>SARIMA</em> secara umum dapat digunakan untuk melakukan prediksi nilai indeks LQ45 3 hari ke depan.<br>Namun hasil prediksi dirasa masih kurang akurat.<br>Hal ini sebenarnya dapat diatasi dengan melakukan eksplorasi tiap-tiap <em>fitur</em> dengan lebih mendalam. Bisa juga dengan melakukan <em>hyperparameter tunning</em> yang lebih variatif pada model.</p>
+<p>Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning <em>LSTM (Long Short Term Memory network)</em> dan/atau <em>GRU (Gated Recurrent Unit)</em> yang menurut beberapa sumber, dapat menghasilkan performa yang lebih baik ketimbang model <em>SARIMAX</em>.</p>
+<h2 id="referensi">REFERENSI</h2>
+<p><strong>Lingkup bisnis</strong>:</p>
+<blockquote>
+<ul>
+<li><a href="https://www.cermati.com/artikel/mengenal-lq45-indeks-saham-paling-populer-dan-perbedaannya-dengan-saham-bluechip">Mengenal LQ45, Indeks Saham Paling Populer dan Perbedaannya dengan Saham Bluechip (by: Siti Hadijah)</a></li>
+<li><a href="https://admiralmarkets.sc/id/education/articles/shares/etf-saham-eido">ETF Saham Eido dan Kinerjanya pada Bursa Efek (by: Jonathan Siahaan)</a></li>
+<li><a href="https://help.pluang.com/knowledge/informasi-umum-seputar-snp-500">Informasi Umum Seputar S&amp;P 500</a></li>
+</ul>
+</blockquote>
+<p><strong>Dekomposisi seasonal</strong>:</p>
+<blockquote>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html">statsmodels seasonal_decompose</a></li>
+<li><a href="https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/">How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)</a></li>
+</ul>
+</blockquote>
+<p><strong>Pemodelan SARIMAX</strong>:</p>
+<blockquote>
+<ul>
+<li><a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html">statsmodels SARIMAX</a></li>
+<li><a href="https://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html">pmdarima</a></li>
+<li><a href="https://towardsdatascience.com/time-series-forecasting-with-arima-sarima-and-sarimax-ee61099e78f6">Time Series Forecasting with ARIMA , SARIMA and SARIMAX (by: Brendan Artley)</a></li>
+<li><a href="https://medium.com/analytics-vidhya/time-series-forecasting-arima-vs-lstm-vs-prophet-62241c203a3b">Time Series Forecasting: ARIMA vs LSTM vs PROPHET (by: Mauro Di Pietro)</a></li>
+<li><a href="https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/">ARIMA Model – Complete Guide to Time Series Forecasting in Python (by: Selva Prabhakaran)</a></li>
+</ul>
+</blockquote>
+<p><strong>Panduan lengkap</strong>:</p>
+<blockquote>
+<ul>
+<li><a href="https://medium.com/inflation-forecasting-using-sarimax-and-nkpc/plotting-monthly-inflation-over-the-selected-time-period-to-check-if-the-time-series-has-any-35e3b1fac761">Inflation Forecasting (by: SwatiSethee)</a></li>
+<li><a href="https://analyticsindiamag.com/complete-guide-to-sarimax-in-python-for-time-series-modeling/">Complete Guide To SARIMAX in Python for Time Series Modeling (by: Yugesh Verma)</a></li>
+</ul>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>eric_arinoto@2022</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="about/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2022-11-25 06:15:35.340619+00:00
+-->
