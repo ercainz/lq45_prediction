@@ -4,18 +4,18 @@ Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan _Model SARIMAX_.
 
 
 ## DESKRIPSI PROJECT
-### Background Permasalahan:
+### Background Permasalahan
 Belom kelar...
 
-### Arsitektur Project:
+### Arsitektur Project
 Belom kelar....
 
-### Output yang diharapkan:
+### Output yang diharapkan
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
 
 
 ## DETAIL PROJECT
-### Data yang diperlukan:
+### Data yang diperlukan
 Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan *SARIMAX* juga memerlukan input eksogen (X).<br>Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval *harian* sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:
 
 1. Harga penutupan index LQ45 pada T+3 (hanya digunakan untuk pemodelan, namun tidak digunakan saat proses prediksi).
@@ -28,10 +28,10 @@ Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan sat
 1. Jumlah nominal transaksi pembelian asing pada T0.
 1. Jumlah nominal transaksi penjualan asing pada T0.
 
-### Output prediksi via API:
+### Output prediksi via API
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
 
-### Workflow dari Project:
+### Workflow dari Project
 Berikut *workflow* pemodelan versi terakhir, setelah melalui beberapa kali proses *trial-error*:
 
 1. Pengambilan data dari file csv dengan format yang sudah sesuai.
@@ -47,7 +47,7 @@ Berikut *workflow* pemodelan versi terakhir, setelah melalui beberapa kali prose
 > * **data train** adalah data sejak awal hingga *31-12-2020*.
 > * **data validasi** adalah data sejak *01-01-2021* hingga *31-07-2021*.
 > * **data test** adalah data sejak *01-08-2021* hingga data terakhir.
-7. Penambahan fitur `seasonal` yang mempresentasikan trend dari kolom `target` dalam interval *bulanan*.
+7. Penambahan fitur `seasonal` yang mempresentasikan *trend* dari kolom `target` dalam interval *bulanan*.
 8. Mendeteksi data outlier pada semua kolom dengan metode *1.5 x IQR*, serta melakukan imputasi dengan nilai *percentile 10%* untuk outlier bawah, dan *percentile 90%* untuk outlier atas.
 9. Proses scaling standardisasi untuk semua kolom, kecuali kolom `target`.
 10. Proses pelatihan model dengan pustaka *pmdarima*, yang secara otomatis dapat menentukan parameter-parameter model *SARIMAX* yang terbaik.
@@ -58,16 +58,11 @@ Berikut ilustrasinya,
 ![flowchart_01](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_01.jpg)
 
 Catatan tambahan:
-> * Setelah langkah ke 7 (Penambahan fitur `seasonal`), pernah dicoba dilakukan proses **Stationaring Data**, yaitu mentransformasi semua kolom menjadi bentuk yang stasioner dengan metode *first difference*. Menurut beberapa literatur, proses ini merupakan syarat pemodelan *ARIMA* dan turunannya. Namun saat proses ke 11 (Evaluasi model), menunjukkan bahwa proses **Stationaring Data** malah menghasilkan performa model yang buruk. Sehingga proses **Stationaring Data** ini tidak diterapkan. 
-
-* Blok Diagram Persiapan Data
-* Blok Diagram Preprocessing
-* Blok Diagram Features Engineering
-* Blok Diagram Pemodelan dan Evaluasinya
+> * Setelah langkah ke 7 (Penambahan fitur `seasonal`), pernah dicoba dilakukan proses **Stationaring Data**, yaitu mentransformasi semua kolom menjadi bentuk yang stasioner dengan metode *first difference*. Menurut beberapa literatur, proses ini merupakan syarat pemodelan *ARIMA* dan turunannya. Namun saat proses ke 11 (Evaluasi model), menunjukkan bahwa proses **Stationaring Data** malah menghasilkan performa model yang buruk. Sehingga proses **Stationaring Data** ini tidak diterapkan.
 
 
 ## DATASET
-### Format dan deskripsi data:
+### Format dan deskripsi data
 **header csv** - *date,lq45,jci,idx30,eido,spy,dom_b,dom_s,for_b,for_s*
 
 | Header | Tipe Data | Definisi | Deskripsi |
@@ -85,7 +80,7 @@ Catatan tambahan:
 
 
 ## CARA PENGGUNAAN
-### Format input untuk melakukan prediksi via API:
+### Format input untuk melakukan prediksi via API
 Menggunakan format standar *json* dengan *key* sebagai berikut:
 
 * `date` - Tanggal dengan format `yyyymmdd`
@@ -122,7 +117,7 @@ Contoh:
 }
 ```
 
-### Format output Respons dari API:
+### Format output Respons dari API
 Respons juga berupa format standar *json* dengan *key* sebagai berikut:
 
 * `input_date` - Tanggal sesuai input `date` dengan format `yyyymmdd`
@@ -142,7 +137,7 @@ Contoh:
 }
 ```
 
-### Menjalankan Layanan Machine Learning di Komputer Lokal:
+### Menjalankan Layanan Machine Learning di Komputer Lokal
 * **Melakukan Retrain Model** :
 > * Dari folder root, jalankan script python `remodelling.py` pada folder *src*.
 > * Pastikan dataset sudah berada di folder *[root]/data/raw* dengan nama file *dataset_Q122.csv* dengan format yang sesuai.
@@ -167,17 +162,17 @@ Model *SARIMAX* yang merupakan pengembangan dari model *ARIMA*/*ARIMAX*/*SARIMA*
 Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM (Long Short Term Memory network)* dan/atau *GRU (Gated Recurrent Unit)* yang menurut beberapa sumber, dapat menghasilkan performa yang lebih baik ketimbang model *SARIMAX*.
 
 ## REFERENSI
-**Lingkup bisnis**:
+**Lingkup bisnis** :
 > * [Mengenal LQ45, Indeks Saham Paling Populer dan Perbedaannya dengan Saham Bluechip (by: Siti Hadijah)](https://www.cermati.com/artikel/mengenal-lq45-indeks-saham-paling-populer-dan-perbedaannya-dengan-saham-bluechip)
 > * [ETF Saham Eido dan Kinerjanya pada Bursa Efek (by: Jonathan Siahaan)](https://admiralmarkets.sc/id/education/articles/shares/etf-saham-eido)
 > * [Informasi Umum Seputar S&P 500](https://help.pluang.com/knowledge/informasi-umum-seputar-snp-500)
 
 
-**Dekomposisi seasonal**:
+**Dekomposisi seasonal** :
 > * [statsmodels seasonal_decompose](https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html)
 > * [How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)](https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/)
 
-**Pemodelan SARIMAX**:
+**Pemodelan SARIMAX** :
 > * [statsmodels SARIMAX](https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)
 > * [pmdarima](https://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html)
 > * [Time Series Forecasting with ARIMA , SARIMA and SARIMAX (by: Brendan Artley)](https://towardsdatascience.com/time-series-forecasting-with-arima-sarima-and-sarimax-ee61099e78f6)

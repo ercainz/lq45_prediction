@@ -8,3 +8,4 @@ Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan _Model SARIMAX_.
 * Versi Terbaru : `1.3.0`
 * Update Terbaru : `23-November-2022`
 * Project selengkapnya dapat diunduh di [github](https://github.com/ercainz/lq45_prediction).
+* Rangkuman Project dapat dibaca di [rangkuman](https://github.com/ercainz/lq45_prediction).
