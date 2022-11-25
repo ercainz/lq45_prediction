@@ -3,7 +3,7 @@ site_description: Prediksi Nilai Index LQ45
 site_author: Eric Arinoto
 copyright: eric_arinoto@2022
 nav:
-  - ReadMe: index.md
-  - About: about.md
+  - DOKUMENTASI: index.md
+  - TENTANG SAYA: about.md
 theme: 
   name: readthedocs

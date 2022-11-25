@@ -14,7 +14,7 @@ Belom kelar....
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
 
 
-## DOKUMENTASI PROJECT
+## DETAIL PROJECT
 ### Data yang diperlukan:
 Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan satu variabel (univariate) deret waktu, pemodelan *SARIMAX* juga memerlukan input eksogen (X).<br>Untuk proses pelatihan, validasi, dan test model, diperlukan data berupa deret waktu dengan interval *harian* sejak 2012 hingga kuartal pertama 2022.<br>Berikut beberapa data yang akan digunakan dalam project ini:
 
@@ -32,6 +32,34 @@ Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan sat
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
 
 ### Workflow dari Project:
+Berikut *workflow* pemodelan versi terakhir, setelah melalui beberapa kali proses *trial-error*:
+
+1. Pengambilan data dari file csv dengan format yang sudah sesuai.
+2. Validasi data untuk memastikan bahwa format sudah sesuai dengan ketentuan.
+3. Resampling data dengan interval *hari kerja* (*senin, selasa, rabu, kamis, jumat*), sekaligus imputasi data point yang hilang dengan metode *ffill*.
+4. Membentuk kolom `target` yang dibentuk dari kolom `lq45` yang di-*shift-forward* sejauh 3 data point.
+5. Penambahan 4 fitur baru (`dom_tot`,`dom_net`,`for_tot`,`for_net`) yang bertujuan untuk memudahkan model dalam melakukan training.
+> * `dom_tot` merupakan kolom `dom_b` dijumlahkan dengan kolom `dom_s`.
+> * `dom_net` merupakan kolom `dom_b` dikurangkan dengan kolom `dom_s`.
+> * `for_tot` merupakan kolom `for_b` dijumlahkan dengan kolom `for_s`.
+> * `for_net` merupakan kolom `for_b` dikurangkan dengan kolom `for_s`.
+6. Splitting data dengan komposisi:
+> * **data train** adalah data sejak awal hingga *31-12-2020*.
+> * **data validasi** adalah data sejak *01-01-2021* hingga *31-07-2021*.
+> * **data test** adalah data sejak *01-08-2021* hingga data terakhir.
+7. Penambahan fitur `seasonal` yang mempresentasikan trend dari kolom `target` dalam interval *bulanan*.
+8. Mendeteksi data outlier pada semua kolom dengan metode *1.5 x IQR*, serta melakukan imputasi dengan nilai *percentile 10%* untuk outlier bawah, dan *percentile 90%* untuk outlier atas.
+9. Proses scaling standardisasi untuk semua kolom, kecuali kolom `target`.
+10. Proses pelatihan model dengan pustaka *pmdarima*, yang secara otomatis dapat menentukan parameter-parameter model *SARIMAX* yang terbaik.
+11. Evaluasi model dilakukan pada **data validasi** dan **data test** dengan cara membandingkan hasil prediksi `pred` dengan kolom `target`.
+
+Berikut ilustrasinya,
+
+![flowchart_01](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_01.jpg)
+
+Catatan tambahan:
+> * Setelah langkah ke 7 (Penambahan fitur `seasonal`), pernah dicoba dilakukan proses **Stationaring Data**, yaitu mentransformasi semua kolom menjadi bentuk yang stasioner dengan metode *first difference*. Menurut beberapa literatur, proses ini merupakan syarat pemodelan *ARIMA* dan turunannya. Namun saat proses ke 11 (Evaluasi model), menunjukkan bahwa proses **Stationaring Data** malah menghasilkan performa model yang buruk. Sehingga proses **Stationaring Data** ini tidak diterapkan. 
+
 * Blok Diagram Persiapan Data
 * Blok Diagram Preprocessing
 * Blok Diagram Features Engineering
