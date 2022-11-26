@@ -59,7 +59,9 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#output-prediksi-via-api">Output prediksi via API</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#workflow-dari-project">Workflow dari Project</a>
+    <li class="toctree-l3"><a class="reference internal" href="#workflow-project-proses-retrain-model">Workflow Project (Proses Retrain Model)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#workflow-project-proses-prediksi">Workflow Project (Proses Prediksi)</a>
     </li>
         </ul>
     </li>
@@ -143,8 +145,8 @@
 <ul>
 <li>Prediksi harga penutupan Indeks LQ45 pada T+3.</li>
 </ul>
-<h3 id="workflow-dari-project">Workflow dari Project</h3>
-<p>Berikut <em>workflow</em> pemodelan versi terakhir, setelah melalui beberapa kali proses <em>trial-error</em>:</p>
+<h3 id="workflow-project-proses-retrain-model">Workflow Project (Proses Retrain Model)</h3>
+<p>Berikut <em>workflow</em> untuk <strong>Proses Retrain Model</strong>, setelah melalui beberapa kali proses <em>trial-error</em>:</p>
 <ol>
 <li>Pengambilan data dari file csv dengan format yang sudah sesuai.</li>
 <li>Validasi data untuk memastikan bahwa format sudah sesuai dengan ketentuan.</li>
@@ -174,13 +176,36 @@
 <li>Evaluasi model dilakukan pada <strong>data validasi</strong> dan <strong>data test</strong> dengan cara membandingkan hasil prediksi <code>pred</code> dengan kolom <code>target</code>.</li>
 </ol>
 <p>Berikut ilustrasinya,</p>
-<p><img alt="flowchart_01" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_01.jpg" /></p>
+<p><img alt="flowchart_1" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_1.jpg" /></p>
 <p>Catatan tambahan:</p>
 <blockquote>
 <ul>
 <li>Setelah langkah ke 7 (Penambahan fitur <code>seasonal</code>), pernah dicoba dilakukan proses <strong>Stationaring Data</strong>, yaitu mentransformasi semua kolom menjadi bentuk yang stasioner dengan metode <em>first difference</em>. Menurut beberapa literatur, proses ini merupakan syarat pemodelan <em>ARIMA</em> dan turunannya. Namun saat proses ke 11 (Evaluasi model), menunjukkan bahwa proses <strong>Stationaring Data</strong> malah menghasilkan performa model yang buruk. Sehingga proses <strong>Stationaring Data</strong> ini tidak diterapkan.</li>
 </ul>
 </blockquote>
+<h3 id="workflow-project-proses-prediksi">Workflow Project (Proses Prediksi)</h3>
+<p>Berikut <em>workflow</em> untuk <strong>Proses Prediksi</strong>:</p>
+<ol>
+<li>Penerimaan data dari <em>User</em> melalui API dengan format yang sudah sesuai.</li>
+<li>Validasi data untuk memastikan bahwa format sudah sesuai dengan ketentuan.</li>
+<li>Proses konversi data kedalam bentuk <em>Pandas Dataframe</em>.</li>
+<li>Penambahan 4 fitur baru (<code>dom_tot</code>,<code>dom_net</code>,<code>for_tot</code>,<code>for_net</code>) yang bertujuan untuk memudahkan model dalam melakukan training.<blockquote>
+<ul>
+<li><code>dom_tot</code> merupakan kolom <code>dom_b</code> dijumlahkan dengan kolom <code>dom_s</code>.</li>
+<li><code>dom_net</code> merupakan kolom <code>dom_b</code> dikurangkan dengan kolom <code>dom_s</code>.</li>
+<li><code>for_tot</code> merupakan kolom <code>for_b</code> dijumlahkan dengan kolom <code>for_s</code>.</li>
+<li><code>for_net</code> merupakan kolom <code>for_b</code> dikurangkan dengan kolom <code>for_s</code>.</li>
+</ul>
+</blockquote>
+</li>
+<li>Penambahan fitur <code>seasonal</code> dari pickle dataframe yang sebelumnya dibuat saat proses pemodelan (file: <strong>[root]\data\remodel\value_for_seasonal.pkl</strong>).</li>
+<li>Mendeteksi data outlier pada semua kolom, serta melakukan imputasi dengan nilai dari pickle dataframe yang sebelumnya dibuat saat proses pemodelan (file: <strong>[root]\data\remodel\value_for_outlier.pkl</strong>).</li>
+<li>Proses scaling standardisasi untuk semua kolom menggunakan pickle scaler yang sebelumnya dibuat saat proses pemodelan (file: <strong>[root]\data\remodel\scaler_x.pkl</strong>).</li>
+<li>Proses prediksi menggunakan model yang sebelumnya dibuat saat proses pemodelan (file: <strong>[root]\models\sarimax.pkl</strong>).</li>
+<li>Pengiriman hasil prediksi kembali ke <em>User</em> melalui API.</li>
+</ol>
+<p>Berikut ilustrasinya,</p>
+<p><img alt="flowchart_2" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_2.jpg" /></p>
 <h2 id="dataset">DATASET</h2>
 <h3 id="format-dan-deskripsi-data">Format dan deskripsi data</h3>
 <p><strong>header csv</strong> - <em>date,lq45,jci,idx30,eido,spy,dom_b,dom_s,for_b,for_s</em></p>
@@ -362,7 +387,7 @@
 <li><strong>Melakukan Retrain Model</strong> :<blockquote>
 <ul>
 <li>Dari folder root, jalankan script python <code>remodelling.py</code> pada folder <em>src</em>.</li>
-<li>Pastikan dataset sudah berada di folder <em>[root]/data/raw</em> dengan nama file <em>dataset_Q122.csv</em> dengan format yang sesuai.</li>
+<li>Pastikan dataset sudah berada di folder <strong>[root]/data/raw</strong> dengan nama file <strong>dataset_Q122.csv</strong> dengan format yang sesuai.</li>
 </ul>
 </blockquote>
 </li>
@@ -468,5 +493,5 @@
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2022-11-25 08:38:34.489985+00:00
+Build Date UTC : 2022-11-26 16:09:03.571837+00:00
 -->
