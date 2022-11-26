@@ -31,8 +31,8 @@ Berbeda dengan pemodelan menggunakan *ARIMA*/*SARIMA* yang hanya menggunakan sat
 ### Output prediksi via API
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
 
-### Workflow dari Project
-Berikut *workflow* pemodelan versi terakhir, setelah melalui beberapa kali proses *trial-error*:
+### Workflow Project (Proses Retrain Model)
+Berikut *workflow* untuk **Proses Retrain Model**, setelah melalui beberapa kali proses *trial-error*:
 
 1. Pengambilan data dari file csv dengan format yang sudah sesuai.
 2. Validasi data untuk memastikan bahwa format sudah sesuai dengan ketentuan.
@@ -55,10 +55,31 @@ Berikut *workflow* pemodelan versi terakhir, setelah melalui beberapa kali prose
 
 Berikut ilustrasinya,
 
-![flowchart_01](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_01.jpg)
+![flowchart_1](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_1.jpg)
 
 Catatan tambahan:
 > * Setelah langkah ke 7 (Penambahan fitur `seasonal`), pernah dicoba dilakukan proses **Stationaring Data**, yaitu mentransformasi semua kolom menjadi bentuk yang stasioner dengan metode *first difference*. Menurut beberapa literatur, proses ini merupakan syarat pemodelan *ARIMA* dan turunannya. Namun saat proses ke 11 (Evaluasi model), menunjukkan bahwa proses **Stationaring Data** malah menghasilkan performa model yang buruk. Sehingga proses **Stationaring Data** ini tidak diterapkan.
+
+### Workflow Project (Proses Prediksi)
+Berikut *workflow* untuk **Proses Prediksi**:
+
+1. Penerimaan data dari *User* melalui API dengan format yang sudah sesuai.
+2. Validasi data untuk memastikan bahwa format sudah sesuai dengan ketentuan.
+3. Proses konversi data kedalam bentuk *Pandas Dataframe*.
+4. Penambahan 4 fitur baru (`dom_tot`,`dom_net`,`for_tot`,`for_net`) yang bertujuan untuk memudahkan model dalam melakukan training.
+> * `dom_tot` merupakan kolom `dom_b` dijumlahkan dengan kolom `dom_s`.
+> * `dom_net` merupakan kolom `dom_b` dikurangkan dengan kolom `dom_s`.
+> * `for_tot` merupakan kolom `for_b` dijumlahkan dengan kolom `for_s`.
+> * `for_net` merupakan kolom `for_b` dikurangkan dengan kolom `for_s`.
+5. Penambahan fitur `seasonal` dari pickle dataframe yang sebelumnya dibuat saat proses pemodelan (file: **[root]\data\remodel\value_for_seasonal.pkl**).
+6. Mendeteksi data outlier pada semua kolom, serta melakukan imputasi dengan nilai dari pickle dataframe yang sebelumnya dibuat saat proses pemodelan (file: **[root]\data\remodel\value_for_outlier.pkl**).
+7. Proses scaling standardisasi untuk semua kolom menggunakan pickle scaler yang sebelumnya dibuat saat proses pemodelan (file: **[root]\data\remodel\scaler_x.pkl**).
+8. Proses prediksi menggunakan model yang sebelumnya dibuat saat proses pemodelan (file: **[root]\models\sarimax.pkl**).
+9. Pengiriman hasil prediksi kembali ke *User* melalui API.
+
+Berikut ilustrasinya,
+
+![flowchart_2](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/flowchart_2.jpg)
 
 
 ## DATASET
@@ -140,7 +161,7 @@ Contoh:
 ### Menjalankan Layanan Machine Learning di Komputer Lokal
 * **Melakukan Retrain Model** :
 > * Dari folder root, jalankan script python `remodelling.py` pada folder *src*.
-> * Pastikan dataset sudah berada di folder *[root]/data/raw* dengan nama file *dataset_Q122.csv* dengan format yang sesuai.
+> * Pastikan dataset sudah berada di folder **[root]/data/raw** dengan nama file **dataset_Q122.csv** dengan format yang sesuai.
 ```
 python src\remodelling.py
 ```
