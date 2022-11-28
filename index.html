@@ -120,9 +120,26 @@
 <p>Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan <em>Model SARIMAX</em>.</p>
 <h2 id="deskripsi-project">DESKRIPSI PROJECT</h2>
 <h3 id="background-permasalahan">Background Permasalahan</h3>
-<p>Belom kelar...</p>
+<p>Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Ada banyak analisa yang dilakukan untuk mencapai tujuan tersebut.<br>
+Pada project ini, akan dicoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu <strong>Indeks LQ45</strong>. </p>
+<p>Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka <em>3 hari</em> didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa <em>kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan</em>.<br>
+Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em> dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.</p>
+<p><img alt="lq45_closeprice" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/lq45_closeprice.jpg" /></p>
+<p>Dari gambar, dapat dilihat bahwa data yang akan diprediksi berupa deret waktu. Salah satu model <em>machine learning</em> yang umum digunakan untuk melakukan pemodelan regresi deret waktu adalah <em>ARIMA</em>. <em>ARIMA</em> merupakan jenis model regresi <em>univariate</em>, sehingga yang tidak memerlukan fitur tambahan apapun untuk menghasilkan prediksi. <em>ARIMA</em> memiliki 3 parameter dasar, yaitu AR - Autoregressive (<code>p</code>), I - Integrated (<code>d</code>), MA - Moving Average (<code>q</code>). Model <em>ARIMA</em> memiliki beberapa pengembangan seiring kemajuan jaman, yaitu <em>SARIMA</em>, <em>ARIMAX</em>, dan <em>SARIMAX</em>.</p>
+<p><em>(S)ARIMA</em> merupakan pengembangan model <em>ARIMA</em> dengan tambahan parameter <em>seasonal</em> yang dapat mendeteksi adanya efek seasonal untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek seasonal dapat melihat pola seasonal tahunan (per 12 bulan). <em>SARIMA</em> memiliki tambahan 3 parameter tambahan selain <em>seasonal</em> (<code>S</code>), yaitu Seasonal-Autoregressive (<code>P</code>), Seasonal-Integrated (<code>D</code>), Seasonal-Moving Average (<code>Q</code>).</p>
+<p><em>ARIMA(X)</em> merupakan pengembangan model <em>ARIMA</em> yang menggunakan tambahan fitur-fitur eksogen untuk menghasilkan prediksi. Hal ini dipercaya dapat meningkatkan performa dari model <em>ARIMA</em> biasa.</p>
+<p><em>(S)ARIMA(X)</em> merupakan gabungan dari model <em>SARIMA</em> dan <em>ARIMAX</em>. Model inilah yang akan digunakan pada project ini.</p>
 <h3 id="arsitektur-project">Arsitektur Project</h3>
-<p>Belom kelar....</p>
+<p>Berikut <em>arsitektur</em> project secara umum:
+<img alt="arsitektur" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/arsitektur.jpg" /></p>
+<p>Penjelasan singkat:</p>
+<ol>
+<li><strong>Proses prediksi</strong> data input didapatkan dari <em>User</em> melalui API. Sedangkan untuk <strong>Proses retrain model</strong> data didapat dalam bentuk file csv.</li>
+<li>Pada <strong>Proses prediksi</strong> (tanda panah warna biru dan merah), tahapan proses yang dilalui di dalam <em>Sistem Machine Learning</em> adalah: <em>Validasi Data</em>, <em>Preprocessing Data &amp; Feature Engineering</em>, dan <em>Predictor</em>.</li>
+<li><em>Predictor</em> adalah output yang dihasilkan pada <strong>Proses retrain model</strong> setelah berhasil didapatkan <em>Model Best-Fit</em>.</li>
+<li>Pada <strong>Proses retrain model</strong> (tanda panah warna hijau), ada tambahan proses <em>Splitting Data</em>, <em>Fit &amp; Train Model</em>. </li>
+<li>Output dari <em>Predictor</em> akan dikembalikan ke <em>User</em> melalui API.</li>
+</ol>
 <h3 id="output-yang-diharapkan">Output yang diharapkan</h3>
 <ul>
 <li>Prediksi harga penutupan Indeks LQ45 pada T+3.</li>
@@ -493,5 +510,5 @@
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2022-11-26 16:09:03.571837+00:00
+Build Date UTC : 2022-11-28 12:44:19.976602+00:00
 -->
