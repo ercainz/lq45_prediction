@@ -5,10 +5,35 @@ Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan _Model SARIMAX_.
 
 ## DESKRIPSI PROJECT
 ### Background Permasalahan
-Belom kelar...
+Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Ada banyak analisa yang dilakukan untuk mencapai tujuan tersebut.<br>
+Pada project ini, akan dicoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu **Indeks LQ45**. 
+
+Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka *3 hari* didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa *kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan*.<br>
+Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, *User* dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.
+
+![lq45_closeprice](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/lq45_closeprice.jpg)
+
+Dari gambar, dapat dilihat bahwa data yang akan diprediksi berupa deret waktu. Salah satu model *machine learning* yang umum digunakan untuk melakukan pemodelan regresi deret waktu adalah *ARIMA*. *ARIMA* merupakan jenis model regresi *univariate*, sehingga yang tidak memerlukan fitur tambahan apapun untuk menghasilkan prediksi. *ARIMA* memiliki 3 parameter dasar, yaitu AR - Autoregressive (`p`), I - Integrated (`d`), MA - Moving Average (`q`). Model *ARIMA* memiliki beberapa pengembangan seiring kemajuan jaman, yaitu *SARIMA*, *ARIMAX*, dan *SARIMAX*.
+
+*(S)ARIMA* merupakan pengembangan model *ARIMA* dengan tambahan parameter *seasonal* yang dapat mendeteksi adanya efek seasonal untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek seasonal dapat melihat pola seasonal tahunan (per 12 bulan). *SARIMA* memiliki tambahan 3 parameter tambahan selain *seasonal* (`S`), yaitu Seasonal-Autoregressive (`P`), Seasonal-Integrated (`D`), Seasonal-Moving Average (`Q`).
+
+*ARIMA(X)* merupakan pengembangan model *ARIMA* yang menggunakan tambahan fitur-fitur eksogen untuk menghasilkan prediksi. Hal ini dipercaya dapat meningkatkan performa dari model *ARIMA* biasa.
+
+*(S)ARIMA(X)* merupakan gabungan dari model *SARIMA* dan *ARIMAX*. Model inilah yang akan digunakan pada project ini.
+
 
 ### Arsitektur Project
-Belom kelar....
+Berikut *arsitektur* project secara umum:
+![arsitektur](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/arsitektur.jpg)
+
+Penjelasan singkat:
+
+1. **Proses prediksi** data input didapatkan dari *User* melalui API. Sedangkan untuk **Proses retrain model** data didapat dalam bentuk file csv.
+2. Pada **Proses prediksi** (tanda panah warna biru dan merah), tahapan proses yang dilalui di dalam *Sistem Machine Learning* adalah: *Validasi Data*, *Preprocessing Data & Feature Engineering*, dan *Predictor*.
+4. *Predictor* adalah output yang dihasilkan pada **Proses retrain model** setelah berhasil didapatkan *Model Best-Fit*.
+5. Pada **Proses retrain model** (tanda panah warna hijau), ada tambahan proses *Splitting Data*, *Fit & Train Model*. 
+6. Output dari *Predictor* akan dikembalikan ke *User* melalui API.
+
 
 ### Output yang diharapkan
 * Prediksi harga penutupan Indeks LQ45 pada T+3.
