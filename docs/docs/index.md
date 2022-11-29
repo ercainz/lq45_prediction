@@ -1,14 +1,15 @@
 # Prediksi Nilai Index LQ45
+> Memprediksi harga penutupan Indeks LQ45 pada 3 hari ke depan menggunakan _Model SARIMAX_.
+
 ---
-Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan _Model SARIMAX_.
-
-
 ## DESKRIPSI PROJECT
 ### Background Permasalahan
-Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Ada banyak analisa yang dilakukan untuk mencapai tujuan tersebut.<br>
-Pada project ini, akan dicoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu **Indeks LQ45**. 
+Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Untuk mencapai tujuan tersebut, sebenarnya ada banyak metode analisa yang dapat dilakukan. Namun untuk mempelajari dan menerapkannya diperlukan waktu dan ketekunan yang konsisten setiap harinya. Hal itu relatif sulit bagi sebagian orang, terlebih lagi bagi mereka yang mempunyai rutinitas yang padat.<br>
 
-Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka *3 hari* didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa *kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan*.<br>
+Pada project ini, dimaksudkan untuk mengatasi problematik tersebut. Project ini akan mencoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu **Indeks LQ45**. 
+
+Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka *3 hari* didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa *kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan*.
+
 Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, *User* dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.
 
 ![lq45_closeprice](https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/lq45_closeprice.jpg)
@@ -28,10 +29,10 @@ Berikut *arsitektur* project secara umum:
 
 Penjelasan singkat:
 
-1. **Proses prediksi** data input didapatkan dari *User* melalui API. Sedangkan untuk **Proses retrain model** data didapat dalam bentuk file csv.
-2. Pada **Proses prediksi** (tanda panah warna biru dan merah), tahapan proses yang dilalui di dalam *Sistem Machine Learning* adalah: *Validasi Data*, *Preprocessing Data & Feature Engineering*, dan *Predictor*.
+1. Pada **Proses prediksi** (tanda panah warna biru dan merah) data input didapatkan dari *User* melalui API. Sedangkan untuk **Proses retrain model** (tanda panah warna hijau) data didapat dalam bentuk file csv.
+2. Pada **Proses prediksi**, tahapan proses yang dilalui di dalam *Sistem Machine Learning* adalah: *Validasi Data*, *Preprocessing Data & Feature Engineering*, dan *Predictor*.
 4. *Predictor* adalah output yang dihasilkan pada **Proses retrain model** setelah berhasil didapatkan *Model Best-Fit*.
-5. Pada **Proses retrain model** (tanda panah warna hijau), ada tambahan proses *Splitting Data*, *Fit & Train Model*. 
+5. Pada **Proses retrain model**, ada tambahan proses *Splitting Data*, *Fit & Train Model*. 
 6. Output dari *Predictor* akan dikembalikan ke *User* melalui API.
 
 
@@ -218,10 +219,12 @@ Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM
 > * [statsmodels seasonal_decompose](https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html)
 > * [How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)](https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/)
 
-**Pemodelan SARIMAX** :
+**ARIMA, ARIMAX, SARIMA, SARIMAX** :
 > * [statsmodels SARIMAX](https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)
 > * [pmdarima](https://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html)
 > * [Time Series Forecasting with ARIMA , SARIMA and SARIMAX (by: Brendan Artley)](https://towardsdatascience.com/time-series-forecasting-with-arima-sarima-and-sarimax-ee61099e78f6)
+> * [How to Create an ARIMA Model for Time Series Forecasting in Python (by: Jason Brownlee)](https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/)
+> * [An Introduction to Time Series Analysis with ARIMA (by: Taha Binhuraib)](https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb)
 > * [Time Series Forecasting: ARIMA vs LSTM vs PROPHET (by: Mauro Di Pietro)](https://medium.com/analytics-vidhya/time-series-forecasting-arima-vs-lstm-vs-prophet-62241c203a3b)
 > * [ARIMA Model – Complete Guide to Time Series Forecasting in Python (by: Selva Prabhakaran)](https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/)
 
