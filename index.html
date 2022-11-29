@@ -116,14 +116,16 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="prediksi-nilai-index-lq45">Prediksi Nilai Index LQ45</h1>
+<blockquote>
+<p>Memprediksi harga penutupan Indeks LQ45 pada 3 hari ke depan menggunakan <em>Model SARIMAX</em>.</p>
+</blockquote>
 <hr />
-<p>Memprediksi nilai Indeks LQ45 3 hari ke depan menggunakan <em>Model SARIMAX</em>.</p>
 <h2 id="deskripsi-project">DESKRIPSI PROJECT</h2>
 <h3 id="background-permasalahan">Background Permasalahan</h3>
-<p>Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Ada banyak analisa yang dilakukan untuk mencapai tujuan tersebut.<br>
-Pada project ini, akan dicoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu <strong>Indeks LQ45</strong>. </p>
-<p>Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka <em>3 hari</em> didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa <em>kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan</em>.<br>
-Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em> dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.</p>
+<p>Pada dunia pasar modal, tentunya banyak orang yang ingin mendapatkan keuntungan yang maksimal. Untuk mencapai tujuan tersebut, sebenarnya ada banyak metode analisa yang dapat dilakukan. Namun untuk mempelajari dan menerapkannya diperlukan waktu dan ketekunan yang konsisten setiap harinya. Hal itu relatif sulit bagi sebagian orang, terlebih lagi bagi mereka yang mempunyai rutinitas yang padat.<br></p>
+<p>Pada project ini, dimaksudkan untuk mengatasi problematik tersebut. Project ini akan mencoba melakukan prediksi harga penutupan salah satu indeks saham yang cukup populer di kalangan dunia pasar modal, yaitu <strong>Indeks LQ45</strong>. </p>
+<p>Nilai indeks LQ45 yang akan diprediksi adalah harga penutupan pada 3 hari ke depan. Pemilihan angka <em>3 hari</em> didapatkan dari hasil analisa dari beberapa analis saham, yang mengatakan bahwa <em>kejadian di T0 idealnya akan terasa efeknya hingga 3-4 hari ke depan</em>.</p>
+<p>Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em> dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.</p>
 <p><img alt="lq45_closeprice" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/lq45_closeprice.jpg" /></p>
 <p>Dari gambar, dapat dilihat bahwa data yang akan diprediksi berupa deret waktu. Salah satu model <em>machine learning</em> yang umum digunakan untuk melakukan pemodelan regresi deret waktu adalah <em>ARIMA</em>. <em>ARIMA</em> merupakan jenis model regresi <em>univariate</em>, sehingga yang tidak memerlukan fitur tambahan apapun untuk menghasilkan prediksi. <em>ARIMA</em> memiliki 3 parameter dasar, yaitu AR - Autoregressive (<code>p</code>), I - Integrated (<code>d</code>), MA - Moving Average (<code>q</code>). Model <em>ARIMA</em> memiliki beberapa pengembangan seiring kemajuan jaman, yaitu <em>SARIMA</em>, <em>ARIMAX</em>, dan <em>SARIMAX</em>.</p>
 <p><em>(S)ARIMA</em> merupakan pengembangan model <em>ARIMA</em> dengan tambahan parameter <em>seasonal</em> yang dapat mendeteksi adanya efek seasonal untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek seasonal dapat melihat pola seasonal tahunan (per 12 bulan). <em>SARIMA</em> memiliki tambahan 3 parameter tambahan selain <em>seasonal</em> (<code>S</code>), yaitu Seasonal-Autoregressive (<code>P</code>), Seasonal-Integrated (<code>D</code>), Seasonal-Moving Average (<code>Q</code>).</p>
@@ -134,10 +136,10 @@ Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em>
 <img alt="arsitektur" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/arsitektur.jpg" /></p>
 <p>Penjelasan singkat:</p>
 <ol>
-<li><strong>Proses prediksi</strong> data input didapatkan dari <em>User</em> melalui API. Sedangkan untuk <strong>Proses retrain model</strong> data didapat dalam bentuk file csv.</li>
-<li>Pada <strong>Proses prediksi</strong> (tanda panah warna biru dan merah), tahapan proses yang dilalui di dalam <em>Sistem Machine Learning</em> adalah: <em>Validasi Data</em>, <em>Preprocessing Data &amp; Feature Engineering</em>, dan <em>Predictor</em>.</li>
+<li>Pada <strong>Proses prediksi</strong> (tanda panah warna biru dan merah) data input didapatkan dari <em>User</em> melalui API. Sedangkan untuk <strong>Proses retrain model</strong> (tanda panah warna hijau) data didapat dalam bentuk file csv.</li>
+<li>Pada <strong>Proses prediksi</strong>, tahapan proses yang dilalui di dalam <em>Sistem Machine Learning</em> adalah: <em>Validasi Data</em>, <em>Preprocessing Data &amp; Feature Engineering</em>, dan <em>Predictor</em>.</li>
 <li><em>Predictor</em> adalah output yang dihasilkan pada <strong>Proses retrain model</strong> setelah berhasil didapatkan <em>Model Best-Fit</em>.</li>
-<li>Pada <strong>Proses retrain model</strong> (tanda panah warna hijau), ada tambahan proses <em>Splitting Data</em>, <em>Fit &amp; Train Model</em>. </li>
+<li>Pada <strong>Proses retrain model</strong>, ada tambahan proses <em>Splitting Data</em>, <em>Fit &amp; Train Model</em>. </li>
 <li>Output dari <em>Predictor</em> akan dikembalikan ke <em>User</em> melalui API.</li>
 </ol>
 <h3 id="output-yang-diharapkan">Output yang diharapkan</h3>
@@ -445,12 +447,14 @@ Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em>
 <li><a href="https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/">How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)</a></li>
 </ul>
 </blockquote>
-<p><strong>Pemodelan SARIMAX</strong> :</p>
+<p><strong>ARIMA, ARIMAX, SARIMA, SARIMAX</strong> :</p>
 <blockquote>
 <ul>
 <li><a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html">statsmodels SARIMAX</a></li>
 <li><a href="https://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html">pmdarima</a></li>
 <li><a href="https://towardsdatascience.com/time-series-forecasting-with-arima-sarima-and-sarimax-ee61099e78f6">Time Series Forecasting with ARIMA , SARIMA and SARIMAX (by: Brendan Artley)</a></li>
+<li><a href="https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/">How to Create an ARIMA Model for Time Series Forecasting in Python (by: Jason Brownlee)</a></li>
+<li><a href="https://towardsdatascience.com/an-introduction-to-time-series-analysis-with-arima-a8b9c9a961fb">An Introduction to Time Series Analysis with ARIMA (by: Taha Binhuraib)</a></li>
 <li><a href="https://medium.com/analytics-vidhya/time-series-forecasting-arima-vs-lstm-vs-prophet-62241c203a3b">Time Series Forecasting: ARIMA vs LSTM vs PROPHET (by: Mauro Di Pietro)</a></li>
 <li><a href="https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/">ARIMA Model – Complete Guide to Time Series Forecasting in Python (by: Selva Prabhakaran)</a></li>
 </ul>
@@ -510,5 +514,5 @@ Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em>
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2022-11-28 12:44:19.976602+00:00
+Build Date UTC : 2022-11-29 14:25:00.608793+00:00
 -->
