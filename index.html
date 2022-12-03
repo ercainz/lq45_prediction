@@ -128,7 +128,7 @@
 <p>Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, <em>User</em> dapat melakukan tindakan yang tepat (beli atau jual) untuk memaksimalkan keuntungan mereka.</p>
 <p><img alt="lq45_closeprice" src="https://raw.githubusercontent.com/ercainz/lq45_prediction/main/docs/images/lq45_closeprice.jpg" /></p>
 <p>Dari gambar, dapat dilihat bahwa data yang akan diprediksi berupa deret waktu. Salah satu model <em>machine learning</em> yang umum digunakan untuk melakukan pemodelan regresi deret waktu adalah <em>ARIMA</em>. <em>ARIMA</em> merupakan jenis model regresi <em>univariate</em>, sehingga yang tidak memerlukan fitur tambahan apapun untuk menghasilkan prediksi. <em>ARIMA</em> memiliki 3 parameter dasar, yaitu AR - Autoregressive (<code>p</code>), I - Integrated (<code>d</code>), MA - Moving Average (<code>q</code>). Model <em>ARIMA</em> memiliki beberapa pengembangan seiring kemajuan jaman, yaitu <em>SARIMA</em>, <em>ARIMAX</em>, dan <em>SARIMAX</em>.</p>
-<p><em>(S)ARIMA</em> merupakan pengembangan model <em>ARIMA</em> dengan tambahan parameter <em>seasonal</em> yang dapat mendeteksi adanya efek seasonal untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek seasonal dapat melihat pola seasonal tahunan (per 12 bulan). <em>SARIMA</em> memiliki tambahan 3 parameter tambahan selain <em>seasonal</em> (<code>S</code>), yaitu Seasonal-Autoregressive (<code>P</code>), Seasonal-Integrated (<code>D</code>), Seasonal-Moving Average (<code>Q</code>).</p>
+<p><em>(S)ARIMA</em> merupakan pengembangan model <em>ARIMA</em> dengan tambahan parameter <em>seasonal</em> yang dapat mendeteksi adanya efek musiman untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek musiman dapat melihat pola musiman secara tahunan (per 12 bulan). <em>SARIMA</em> memiliki tambahan 3 parameter tambahan selain <em>seasonal</em> (<code>S</code>), yaitu Seasonal-Autoregressive (<code>P</code>), Seasonal-Integrated (<code>D</code>), Seasonal-Moving Average (<code>Q</code>).</p>
 <p><em>ARIMA(X)</em> merupakan pengembangan model <em>ARIMA</em> yang menggunakan tambahan fitur-fitur eksogen untuk menghasilkan prediksi. Hal ini dipercaya dapat meningkatkan performa dari model <em>ARIMA</em> biasa.</p>
 <p><em>(S)ARIMA(X)</em> merupakan gabungan dari model <em>SARIMA</em> dan <em>ARIMAX</em>. Model inilah yang akan digunakan pada project ini.</p>
 <h3 id="arsitektur-project">Arsitektur Project</h3>
@@ -440,11 +440,12 @@
 <li><a href="https://help.pluang.com/knowledge/informasi-umum-seputar-snp-500">Informasi Umum Seputar S&amp;P 500</a></li>
 </ul>
 </blockquote>
-<p><strong>Dekomposisi seasonal</strong> :</p>
+<p><strong>Dekomposisi seasonal dan ADF Test</strong> :</p>
 <blockquote>
 <ul>
 <li><a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html">statsmodels seasonal_decompose</a></li>
 <li><a href="https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/">How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)</a></li>
+<li><a href="https://www.machinelearningplus.com/time-series/augmented-dickey-fuller-test/">Augmented Dickey Fuller Test (ADF Test) – Must Read Guide (by: Selva Prabhakaran)</a></li>
 </ul>
 </blockquote>
 <p><strong>ARIMA, ARIMAX, SARIMA, SARIMAX</strong> :</p>
@@ -514,5 +515,5 @@
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2022-11-29 14:28:48.109783+00:00
+Build Date UTC : 2022-12-03 09:09:29.092043+00:00
 -->
