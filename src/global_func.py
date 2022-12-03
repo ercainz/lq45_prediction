@@ -49,6 +49,7 @@ def api_homepage():
                         "Author": read_config(config_dir=config_dir, section='PROJECT', key='AUTHOR'),
                         "Version": read_config(config_dir=config_dir, section='PROJECT', key='VERSION'),
                         "Last Update": read_config(config_dir=config_dir, section='PROJECT', key='LASTUPDATE'),
+                        "Documentation": read_config(config_dir=config_dir, section='PROJECT', key='DOCS'),
                         }
 
         return dict_result

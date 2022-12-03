@@ -7,15 +7,15 @@ from pipeline_predicting import pipeline
 from global_func import api_homepage
 
 class InputData(BaseModel):
-    date: str = Field(..., min_length=8, max_length=8)
-    jci: float = Field(..., gt=1000, le=20000)
-    idx30: float = Field(..., gt=100, le=5000)
-    eido: float = Field(..., gt=1, le=200)
-    spy: float = Field(..., gt=1, le=5000)
-    dom_b: float = Field(..., gt=0, le=100)
-    dom_s: float = Field(..., gt=0, le=100)
-    for_b: float = Field(..., gt=0, le=100)
-    for_s: float = Field(..., gt=0, le=100)
+    date: str = Field(default='yyyymmdd', min_length=8, max_length=8)
+    jci: float = Field(default=7000, gt=1000, le=20000)
+    idx30: float = Field(default=500, gt=100, le=5000)
+    eido: float = Field(default=24.00, gt=1, le=200)
+    spy: float = Field(default=400, gt=1, le=5000)
+    dom_b: float = Field(default=1.00, gt=0, le=100)
+    dom_s: float = Field(default=1.00, gt=0, le=100)
+    for_b: float = Field(default=1.00, gt=0, le=100)
+    for_s: float = Field(default=1.00, gt=0, le=100)
 #==========================================================================================================================#
 #==========================================================================================================================#
 app = FastAPI()
