@@ -16,7 +16,7 @@ Diharapkan dengan mengetahui harga penutupan pada 3 hari ke depan, *User* dapat 
 
 Dari gambar, dapat dilihat bahwa data yang akan diprediksi berupa deret waktu. Salah satu model *machine learning* yang umum digunakan untuk melakukan pemodelan regresi deret waktu adalah *ARIMA*. *ARIMA* merupakan jenis model regresi *univariate*, sehingga yang tidak memerlukan fitur tambahan apapun untuk menghasilkan prediksi. *ARIMA* memiliki 3 parameter dasar, yaitu AR - Autoregressive (`p`), I - Integrated (`d`), MA - Moving Average (`q`). Model *ARIMA* memiliki beberapa pengembangan seiring kemajuan jaman, yaitu *SARIMA*, *ARIMAX*, dan *SARIMAX*.
 
-*(S)ARIMA* merupakan pengembangan model *ARIMA* dengan tambahan parameter *seasonal* yang dapat mendeteksi adanya efek seasonal untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek seasonal dapat melihat pola seasonal tahunan (per 12 bulan). *SARIMA* memiliki tambahan 3 parameter tambahan selain *seasonal* (`S`), yaitu Seasonal-Autoregressive (`P`), Seasonal-Integrated (`D`), Seasonal-Moving Average (`Q`).
+*(S)ARIMA* merupakan pengembangan model *ARIMA* dengan tambahan parameter *seasonal* yang dapat mendeteksi adanya efek musiman untuk periode waktu yang lebih besar. Misalnya, untuk data dengan rentang waktu bulanan, efek musiman dapat melihat pola musiman secara tahunan (per 12 bulan). *SARIMA* memiliki tambahan 3 parameter tambahan selain *seasonal* (`S`), yaitu Seasonal-Autoregressive (`P`), Seasonal-Integrated (`D`), Seasonal-Moving Average (`Q`).
 
 *ARIMA(X)* merupakan pengembangan model *ARIMA* yang menggunakan tambahan fitur-fitur eksogen untuk menghasilkan prediksi. Hal ini dipercaya dapat meningkatkan performa dari model *ARIMA* biasa.
 
@@ -215,9 +215,10 @@ Untuk penelitian lebih lanjut, dapat coba digunakan model machine learning *LSTM
 > * [Informasi Umum Seputar S&P 500](https://help.pluang.com/knowledge/informasi-umum-seputar-snp-500)
 
 
-**Dekomposisi seasonal** :
+**Dekomposisi seasonal dan ADF Test** :
 > * [statsmodels seasonal_decompose](https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal_decompose.html)
 > * [How to Decompose Time Series Data into Trend and Seasonality (by: Jason Brownlee)](https://machinelearningmastery.com/decompose-time-series-data-trend-seasonality/)
+> * [Augmented Dickey Fuller Test (ADF Test) – Must Read Guide (by: Selva Prabhakaran)](https://www.machinelearningplus.com/time-series/augmented-dickey-fuller-test/)
 
 **ARIMA, ARIMAX, SARIMA, SARIMAX** :
 > * [statsmodels SARIMAX](https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)

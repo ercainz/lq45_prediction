@@ -56,7 +56,7 @@ def api_homepage():
         print(f"ERROR [{defname}] : {str(e)}")
 #==========================================================================================================================#
 #==========================================================================================================================#
-def plotting_hist_all(dataframe):
+def plotting_hist_all(dataframe, savefig=''):
     fig, axes = plt.subplots(nrows=7
                             ,ncols=2
                             ,figsize=[16,20]
@@ -79,9 +79,12 @@ def plotting_hist_all(dataframe):
 
     plt.tight_layout()
     plt.show(block=False)
+
+    if savefig != '':
+        fig.savefig(savefig)
 #==========================================================================================================================#
 #==========================================================================================================================#
-def plotting_line_all(dataframe):
+def plotting_line_all(dataframe, savefig=''):
     fig, axes = plt.subplots(nrows=7
                             ,ncols=2
                             ,figsize=[16,20]
@@ -101,9 +104,12 @@ def plotting_line_all(dataframe):
 
     plt.tight_layout()
     plt.show(block=False)
+
+    if savefig != '':
+        fig.savefig(savefig)
 #==========================================================================================================================#
 #==========================================================================================================================#
-def plotting_box_all(dataframe):
+def plotting_box_all(dataframe, savefig=''):
     fig, axes = plt.subplots(nrows=7
                             ,ncols=2
                             ,figsize=[16,20]
@@ -123,5 +129,8 @@ def plotting_box_all(dataframe):
 
     plt.tight_layout()
     plt.show(block=False)
+
+    if savefig != '':
+        fig.savefig(savefig)
 #==========================================================================================================================#
 #==========================================================================================================================#
